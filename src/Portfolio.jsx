@@ -27,6 +27,12 @@ import {
   Film
 } from 'lucide-react';
 
+const asset = (path) => {
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${base}${cleanPath}`;
+};
+
 export default function Portfolio() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
@@ -316,17 +322,25 @@ export default function Portfolio() {
       {/* ============================================================ */}
       <section id="hero" className="hero-pinned">
         <img
-          src="/assets/hero-shader.webp"
+          src={asset('/assets/hero-shader.webp')}
           alt=""
           className="hero-shader opacity-90"
         />
-        <div className="hero-sky" aria-hidden="true"></div>
-        <div className="hero-noise" aria-hidden="true"></div>
+        <div
+          className="hero-sky"
+          style={{ backgroundImage: `url(${asset('/assets/hero-sky-day.webp')})` }}
+          aria-hidden="true"
+        ></div>
+        <div
+          className="hero-noise"
+          style={{ backgroundImage: `url(${asset('/assets/imgNoiseTexture.png')})` }}
+          aria-hidden="true"
+        ></div>
 
         <div ref={heroContentRef} className="hero-content" id="hero-content">
           {/* Hatched Sun & Soft Clouds */}
-          <img src="/assets/sun.svg" alt="" className="sun-group" />
-          <img src="/assets/cloud.svg" alt="" className="hero-cloud cloud-a" />
+          <img src={asset('/assets/sun.svg')} alt="" className="sun-group" />
+          <img src={asset('/assets/cloud.svg')} alt="" className="hero-cloud cloud-a" />
           {/* Centered Hero Container */}
           <div className="relative max-w-4xl w-full px-4 sm:px-6 z-20 flex flex-col items-center text-center -translate-y-4 sm:-translate-y-6">
             {/* Eyebrow */}
@@ -385,7 +399,12 @@ export default function Portfolio() {
       {/* ============================================================ */}
       <div ref={curtainRef} className="cream-curtain-wrapper">
         {/* Organic Cream Cloud Seam */}
-        <div ref={skyBandRef} className="sky-band" aria-hidden="true"></div>
+        <div
+          ref={skyBandRef}
+          className="sky-band"
+          style={{ backgroundImage: `url(${asset('/assets/sky-band.svg')})` }}
+          aria-hidden="true"
+        ></div>
 
         {/* ── Scroll-Driven Paper Plane with Gutter-Only Geometry ── */}
         <div ref={flyRef} className="plane-fly hidden md:block" aria-hidden="true">
@@ -459,7 +478,7 @@ export default function Portfolio() {
           {/* Origami Plane Sprite */}
           <img
             ref={spriteRef}
-            src="/assets/plane.svg"
+            src={asset('/assets/plane.svg')}
             alt=""
             className="plane-sprite"
           />
@@ -648,7 +667,7 @@ export default function Portfolio() {
                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF6F0] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
                   <video
                     ref={poglazhuVideoRef}
-                    src="/assets/poglazhu.webm"
+                    src={asset('/assets/poglazhu.webm')}
                     muted
                     loop
                     playsInline
@@ -728,7 +747,7 @@ export default function Portfolio() {
                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#E2F3FD] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
                   <video
                     ref={bisVideoRef}
-                    src="/assets/bis.mp4"
+                    src={asset('/assets/bis.mp4')}
                     muted
                     loop
                     playsInline
@@ -800,7 +819,7 @@ export default function Portfolio() {
                 {/* 100% Clear, Perfectly-Fitted Mockup Container */}
                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#BEF264] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
                   <img
-                    src="/assets/zimov-mockup.png"
+                    src={asset('/assets/zimov-mockup.png')}
                     alt="Зимов и Партнёры"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -866,7 +885,7 @@ export default function Portfolio() {
                 {/* 100% Clear, Perfectly-Fitted Mockup Container */}
                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#94EED6] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
                   <img
-                    src="/assets/freenet-mockup.png"
+                    src={asset('/assets/freenet-mockup.png')}
                     alt="FreeNet Open Source PWA"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />

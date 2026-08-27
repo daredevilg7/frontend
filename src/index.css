@@ -65,7 +65,6 @@
 .hero-sky {
   position: absolute;
   inset: 0 -10%;
-  background-image: url("/assets/hero-sky-day.webp");
   background-size: cover;
   background-position: center 35%;
   background-repeat: no-repeat;
@@ -77,7 +76,6 @@
 .hero-noise {
   position: absolute;
   inset: 0;
-  background-image: url("/assets/imgNoiseTexture.png");
   background-size: 1024px 1024px;
   opacity: 0.08;
   pointer-events: none;
@@ -149,7 +147,6 @@
   width: 100%;
   aspect-ratio: 1440 / 471;
   top: -18vw;
-  background-image: url("/assets/sky-band.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: top;
