@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #FFF9F1;
+    color: #141416;
+    overflow-x: clip;
+  }
+  
+  body {
+    background-color: #FFF9F1;
+    color: #141416;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: #3456C8;
+    color: #ffffff;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF9F1;
+}
+::-webkit-scrollbar-thumb {
+  background: #E4D8C7;
+  border-radius: 9999px;
+  border: 2px solid #FFF9F1;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4B5A0;
+}
+
+/* ════ HERO PINNED STACK ════ */
+.hero-pinned {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background: radial-gradient(ellipse 1000px 1340px at 68.65% 23.5%, #4A8DE8 0%, #3B7DD8 100%);
+}
+
+.hero-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.hero-sky {
+  position: absolute;
+  inset: 0 -10%;
+  background-image: url("/assets/hero-sky-day.webp");
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/imgNoiseTexture.png");
+  background-size: 1024px 1024px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: auto;
+  z-index: 2;
+  will-change: transform;
+  --sun-w: clamp(260px, 44vw, 640px);
+}
+
+.sun-group {
+  position: absolute;
+  width: var(--sun-w);
+  top: calc(var(--sun-w) * -0.22);
+  right: calc(var(--sun-w) * -0.15);
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-cloud.cloud-a {
+  position: absolute;
+  width: calc(var(--sun-w) * 0.72);
+  right: calc(var(--sun-w) * -0.44);
+  top: calc(var(--sun-w) * 0.26);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-cloud.cloud-b {
+  position: absolute;
+  width: calc(var(--sun-w) * 0.38);
+  right: calc(var(--sun-w) * 0.40);
+  top: calc(var(--sun-w) * 0.24);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ════ SOLID CREAM CURTAIN WRAPPER (Covers hero 100%) ════ */
+.cream-curtain-wrapper {
+  position: relative;
+  z-index: 10;
+  background-color: #FFF9F1;
+  width: 100%;
+  overflow: visible;
+}
+
+.sky-band {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 1440 / 471;
+  top: -18vw;
+  background-image: url("/assets/sky-band.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .sky-band {
+    top: -24vw;
+  }
+}
+
+/* ════ PAPER PLANE FLIGHT OVERLAY (Exact donor architecture) ════ */
+.plane-fly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 35;
+}
+
+.plane-trail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.plane-sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: auto;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 40;
+}
+
+
+
+/* ════ SPRING HOVER ON LETTERS ════ */
+.h-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+  will-change: transform;
+}
+
+.h-letter:hover {
+  transform: translateY(-6px) rotate(-5deg) scale(1.06);
+  color: #F4D24A;
+}
+
+/* ════ CONTINUOUS DUAL MARQUEE ════ */
+@keyframes marquee-forward {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-backward {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-forward 32s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-backward 32s linear infinite;
+}
+
+/* ════ TAPE STICKERS ON POLAROIDS ════ */
+.tape-strip {
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  backdrop-filter: blur(3px);
+}
+
+/* ════ CINEMATIC PROJECT TILES ════ */
+.project-tile-card {
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+}
+
+.project-tile-card:hover {
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.phone-mockup-frame {
+  border: 10px solid #1C1C1E;
+  border-radius: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
