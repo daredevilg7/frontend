@@ -33,15 +33,24 @@ const asset = (path) => {
   return `${base}${cleanPath}`;
 };
 
-function ProjectVideoPreview({ src, type, bgColor = 'bg-[#FAF6F0]', title = 'Проект' }) {
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+function ProjectVideoPreview({ videoRef: externalRef, src, type, bgColor = 'bg-[#FAF6F0]' }) {
+  const internalRef = useRef(null);
+  const videoRef = externalRef || internalRef;
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Direct DOM configuration required by iOS WebKit for soundless inline autoplay
+    const hasTouch = typeof window !== 'undefined' && (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    );
+    setIsTouchDevice(hasTouch);
+
+    // Direct DOM configuration required by iOS WebKit for soundless inline playback
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
@@ -50,73 +59,81 @@ function ProjectVideoPreview({ src, type, bgColor = 'bg-[#FAF6F0]', title = 'П�
     video.setAttribute('webkit-playsinline', '');
     video.setAttribute('x5-playsinline', '');
 
-    const tryPlay = () => {
-      const p = video.play();
-      if (p !== undefined) {
-        p.then(() => setIsPlaying(true)).catch(() => {
-          setIsPlaying(false);
-        });
-      }
-    };
-
-    tryPlay();
-
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
-    const onLoaded = () => tryPlay();
 
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
-    video.addEventListener('loadeddata', onLoaded);
-    video.addEventListener('canplay', tryPlay);
 
-    // Auto-play when scrolled into viewport, pause when offscreen to save mobile battery
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            tryPlay();
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    // Mobile / Touch devices: auto-play when entering viewport, pause when offscreen
+    let observer = null;
+    if (hasTouch) {
+      const tryPlay = () => {
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => setIsPlaying(true)).catch(() => {
+            setIsPlaying(false);
+          });
+        }
+      };
 
-    observer.observe(video);
+      tryPlay();
+
+      const onLoaded = () => tryPlay();
+      video.addEventListener('loadeddata', onLoaded);
+      video.addEventListener('canplay', tryPlay);
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tryPlay();
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(video);
+
+      return () => {
+        video.removeEventListener('play', onPlay);
+        video.removeEventListener('pause', onPause);
+        video.removeEventListener('loadeddata', onLoaded);
+        video.removeEventListener('canplay', tryPlay);
+        if (observer) observer.disconnect();
+      };
+    }
 
     return () => {
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
-      video.removeEventListener('loadeddata', onLoaded);
-      video.removeEventListener('canplay', tryPlay);
-      observer.disconnect();
+      if (observer) observer.disconnect();
     };
   }, [src]);
 
-  const togglePlay = (e) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsPlaying(false);
+  // Mobile-only: tap to toggle play/pause
+  const handleMobileClick = (e) => {
+    if (isTouchDevice && videoRef.current) {
+      e.stopPropagation();
+      if (videoRef.current.paused) {
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
     }
   };
 
   return (
     <div
-      onClick={togglePlay}
-      className={`relative w-full aspect-[16/10] rounded-2xl overflow-hidden ${bgColor} border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center cursor-pointer select-none`}
-      title={`${title} — нажмите для паузы/воспроизведения`}
+      onClick={handleMobileClick}
+      className={`relative w-full aspect-[16/10] rounded-2xl overflow-hidden ${bgColor} border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center select-none`}
     >
       <video
         ref={videoRef}
-        autoPlay
         muted
         loop
         playsInline
@@ -126,25 +143,15 @@ function ProjectVideoPreview({ src, type, bgColor = 'bg-[#FAF6F0]', title = 'П�
         <source src={src} type={type} />
       </video>
 
-      {/* Center Play Button Overlay (visible when paused or on hover) */}
+      {/* Mobile-only pause indicator (shown ONLY on touch devices when paused) */}
       <div
-        className={`absolute inset-0 flex items-center justify-center bg-black/25 backdrop-blur-[2px] transition-opacity duration-300 pointer-events-none ${
-          !isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        className={`md:hidden absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-[1px] transition-opacity duration-300 pointer-events-none ${
+          !isPlaying && isTouchDevice ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="w-12 h-12 rounded-full bg-white/90 text-neutral-900 shadow-xl flex items-center justify-center backdrop-blur-md transition-transform transform group-hover:scale-110">
-          {isPlaying ? (
-            <Pause className="w-5 h-5 fill-neutral-900 text-neutral-900" />
-          ) : (
-            <Play className="w-5 h-5 fill-neutral-900 text-neutral-900 ml-0.5" />
-          )}
+        <div className="w-12 h-12 rounded-full bg-white/90 text-neutral-900 shadow-xl flex items-center justify-center backdrop-blur-md">
+          <Play className="w-5 h-5 fill-neutral-900 text-neutral-900 ml-0.5" />
         </div>
-      </div>
-
-      {/* Subtle Top-Right Status Badge */}
-      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white text-[10px] font-mono tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-        <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`}></span>
-        <span>{isPlaying ? 'LIVE' : 'PAUSED'}</span>
       </div>
     </div>
   );
@@ -153,6 +160,10 @@ function ProjectVideoPreview({ src, type, bgColor = 'bg-[#FAF6F0]', title = 'П�
 export default function Portfolio() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+
+  // Project Video Refs for desktop hover playback
+  const poglazhuVideoRef = useRef(null);
+  const bisVideoRef = useRef(null);
 
   // Interactive Checklist State
   const [checklist, setChecklist] = useState([
@@ -764,14 +775,24 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
               {/* Card 01: Поглажу РФ */}
               <div
+                onMouseEnter={() => {
+                  if (poglazhuVideoRef.current) {
+                    poglazhuVideoRef.current.play().catch(() => {});
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (poglazhuVideoRef.current) {
+                    poglazhuVideoRef.current.pause();
+                  }
+                }}
                 className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
               >
                 {/* 100% Clear, Perfectly-Fitted Video Container */}
                 <ProjectVideoPreview
+                  videoRef={poglazhuVideoRef}
                   src={asset('/assets/poglazhu.webm')}
                   type="video/webm"
                   bgColor="bg-[#FAF6F0]"
-                  title="Поглажу РФ"
                 />
 
                 {/* Technical Details & Titles in Card Body */}
@@ -829,14 +850,24 @@ export default function Portfolio() {
 
               {/* Card 02: БИС Инжиниринг */}
               <div
+                onMouseEnter={() => {
+                  if (bisVideoRef.current) {
+                    bisVideoRef.current.play().catch(() => {});
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (bisVideoRef.current) {
+                    bisVideoRef.current.pause();
+                  }
+                }}
                 className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
               >
                 {/* 100% Clear, Perfectly-Fitted Video Container */}
                 <ProjectVideoPreview
+                  videoRef={bisVideoRef}
                   src={asset('/assets/bis.mp4')}
                   type="video/mp4"
                   bgColor="bg-[#E2F3FD]"
-                  title="БИС — Баланс Инженерных Систем"
                 />
 
                 {/* Technical Details & Titles in Card Body */}
