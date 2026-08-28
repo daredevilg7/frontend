@@ -33,13 +33,126 @@ const asset = (path) => {
   return `${base}${cleanPath}`;
 };
 
+function ProjectVideoPreview({ src, type, bgColor = 'bg-[#FAF6F0]', title = 'Проект' }) {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Direct DOM configuration required by iOS WebKit for soundless inline autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('x5-playsinline', '');
+
+    const tryPlay = () => {
+      const p = video.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying(true)).catch(() => {
+          setIsPlaying(false);
+        });
+      }
+    };
+
+    tryPlay();
+
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    const onLoaded = () => tryPlay();
+
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    video.addEventListener('loadeddata', onLoaded);
+    video.addEventListener('canplay', tryPlay);
+
+    // Auto-play when scrolled into viewport, pause when offscreen to save mobile battery
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tryPlay();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
+      video.removeEventListener('loadeddata', onLoaded);
+      video.removeEventListener('canplay', tryPlay);
+      observer.disconnect();
+    };
+  }, [src]);
+
+  const togglePlay = (e) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div
+      onClick={togglePlay}
+      className={`relative w-full aspect-[16/10] rounded-2xl overflow-hidden ${bgColor} border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center cursor-pointer select-none`}
+      title={`${title} — нажмите для паузы/воспроизведения`}
+    >
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="w-full h-full object-cover object-center rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]"
+      >
+        <source src={src} type={type} />
+      </video>
+
+      {/* Center Play Button Overlay (visible when paused or on hover) */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center bg-black/25 backdrop-blur-[2px] transition-opacity duration-300 pointer-events-none ${
+          !isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+        }`}
+      >
+        <div className="w-12 h-12 rounded-full bg-white/90 text-neutral-900 shadow-xl flex items-center justify-center backdrop-blur-md transition-transform transform group-hover:scale-110">
+          {isPlaying ? (
+            <Pause className="w-5 h-5 fill-neutral-900 text-neutral-900" />
+          ) : (
+            <Play className="w-5 h-5 fill-neutral-900 text-neutral-900 ml-0.5" />
+          )}
+        </div>
+      </div>
+
+      {/* Subtle Top-Right Status Badge */}
+      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white text-[10px] font-mono tracking-wider flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`}></span>
+        <span>{isPlaying ? 'LIVE' : 'PAUSED'}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Portfolio() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
-
-  // Project Video Refs
-  const poglazhuVideoRef = useRef(null);
-  const bisVideoRef = useRef(null);
 
   // Interactive Checklist State
   const [checklist, setChecklist] = useState([
@@ -651,30 +764,15 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
               {/* Card 01: Поглажу РФ */}
               <div
-                onMouseEnter={() => {
-                  if (poglazhuVideoRef.current) {
-                    poglazhuVideoRef.current.play().catch(() => {});
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (poglazhuVideoRef.current) {
-                    poglazhuVideoRef.current.pause();
-                  }
-                }}
                 className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
               >
                 {/* 100% Clear, Perfectly-Fitted Video Container */}
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF6F0] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
-                  <video
-                    ref={poglazhuVideoRef}
-                    src={asset('/assets/poglazhu.webm')}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]"
-                  />
-                </div>
+                <ProjectVideoPreview
+                  src={asset('/assets/poglazhu.webm')}
+                  type="video/webm"
+                  bgColor="bg-[#FAF6F0]"
+                  title="Поглажу РФ"
+                />
 
                 {/* Technical Details & Titles in Card Body */}
                 <div className="flex-1 flex flex-col justify-between">
@@ -731,30 +829,15 @@ export default function Portfolio() {
 
               {/* Card 02: БИС Инжиниринг */}
               <div
-                onMouseEnter={() => {
-                  if (bisVideoRef.current) {
-                    bisVideoRef.current.play().catch(() => {});
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (bisVideoRef.current) {
-                    bisVideoRef.current.pause();
-                  }
-                }}
                 className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
               >
                 {/* 100% Clear, Perfectly-Fitted Video Container */}
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#E2F3FD] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
-                  <video
-                    ref={bisVideoRef}
-                    src={asset('/assets/bis.mp4')}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover object-center rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]"
-                  />
-                </div>
+                <ProjectVideoPreview
+                  src={asset('/assets/bis.mp4')}
+                  type="video/mp4"
+                  bgColor="bg-[#E2F3FD]"
+                  title="БИС — Баланс Инженерных Систем"
+                />
 
                 {/* Technical Details & Titles in Card Body */}
                 <div className="flex-1 flex flex-col justify-between">
