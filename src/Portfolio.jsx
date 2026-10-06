@@ -261,7 +261,7 @@ export default function Portfolio() {
       const s2Start = vh * 1.05;
       const s2End = vh * 1.85;
       const s3Start = vh * 2.05;
-      const s3End = vh * 3.6;
+      const s3End = vh * 4.2;
 
       let pt = { x: 210, y: 110 };
       let nextPt = { x: 215, y: 115 };
@@ -558,7 +558,7 @@ export default function Portfolio() {
                   fill="none"
                   stroke="#ffffff"
                   strokeWidth="56"
-                  d="M 120 1460 C 60 1680 50 1960 90 2240 C 110 2380 120 2480 130 2560"
+                  d="M 120 1460 C 60 1680 50 1960 90 2240 C 110 2500 120 2800 130 3060"
                 />
               </mask>
             </defs>
@@ -595,7 +595,7 @@ export default function Portfolio() {
               strokeDasharray="10 6"
               mask="url(#maskSeg3)"
               opacity="0.32"
-              d="M 120 1460 C 60 1680 50 1960 90 2240 C 110 2380 120 2480 130 2560"
+              d="M 120 1460 C 60 1680 50 1960 90 2240 C 110 2500 120 2800 130 3060"
             />
           </svg>
 
@@ -924,9 +924,75 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* ROW 2: Symmetrical 2-Column Grid (Zimov & FreeNet Open Source) */}
+            {/* ROW 2: Symmetrical 2-Column Grid (Autocheck & Zimov) */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-              {/* Card 03: Зимов и Партнёры */}
+              {/* Card 03: Авточек */}
+              <div
+                className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
+              >
+                {/* 100% Clear, Perfectly-Fitted Mockup Container */}
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#0F172A] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
+                  <img
+                    src={asset('/assets/autocheck-mockup.png')}
+                    alt="Авточек — сервис проверки истории автомобилей"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Technical Details & Titles in Card Body */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-mono font-bold text-[#EA580C] group-hover:text-[#FB923C] uppercase tracking-wider transition-colors duration-300">
+                        03. Frontend / React & REST API
+                      </span>
+                      <a
+                        href="https://autocheck24.ru"
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white group-hover:bg-white/10 text-xs font-mono font-bold text-neutral-800 group-hover:text-white border border-neutral-300 group-hover:border-white/20 transition-all hover:scale-105"
+                      >
+                        <span>autocheck24.ru</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-[#141416] group-hover:text-white transition-colors duration-300">
+                      Авточек — проверка истории автомобилей
+                    </h3>
+
+                    <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
+                        <span>Разработал SPA-интерфейс сервиса проверки авто по VIN, госномеру и номеру кузова.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
+                        <span>Реализовал валидацию и маскирование полей ввода для безошибочного оформления запроса.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
+                        <span>Спроектировал динамическую ленту последних проверок и интерактивный просмотр примера отчёта.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
+                        <span>Интегрировал REST API для асинхронного поиска по базам данных с индикацией этапов загрузки.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
+                    {['React', 'TypeScript', 'TailwindCSS', 'REST API', 'Vite', 'UI/UX'].map((tag) => (
+                      <span key={tag} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 04: Зимов и Партнёры */}
               <div
                 className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
               >
@@ -944,7 +1010,7 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-[#4361EE] group-hover:text-[#818CF8] uppercase tracking-wider transition-colors duration-300">
-                        03. Frontend / React & UX
+                        04. Frontend / React & UX
                       </span>
                       <a
                         href="https://zimovlaw.ru"
@@ -991,13 +1057,15 @@ export default function Portfolio() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Card 04: FreeNet (Open Source PWA) */}
-              <div
-                className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] flex flex-col justify-between p-6 sm:p-8 group cursor-pointer"
-              >
+            {/* ROW 3: Featured Open Source Project (FreeNet) */}
+            <div
+              className="project-tile-card bg-[#F4EDE2] hover:bg-[#141416] text-[#141416] hover:text-white border border-[#E5D8C5] hover:border-neutral-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 rounded-[32px] p-6 sm:p-8 group cursor-pointer"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 {/* 100% Clear, Perfectly-Fitted Mockup Container */}
-                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#94EED6] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 mb-6 flex items-center justify-center">
+                <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#94EED6] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 flex items-center justify-center">
                   <img
                     src={asset('/assets/freenet-mockup.png')}
                     alt="FreeNet Open Source PWA"
@@ -1010,7 +1078,7 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-emerald-600 group-hover:text-emerald-400 uppercase tracking-wider transition-colors duration-300">
-                        04. Open Source / PWA & Geo
+                        05. Open Source / PWA & Geo
                       </span>
                       <a
                         href="https://github.com/daredevil666l/FreeNet"
@@ -1181,7 +1249,7 @@ export default function Portfolio() {
                         Frontend-разработчик
                       </h3>
                       <p className="text-sm font-semibold text-neutral-600 font-sans">
-                        Фриланс · Уфа
+                        Digital-агентство «Квадратная линия» · Уфа
                       </p>
                     </div>
                   </div>
@@ -1189,11 +1257,11 @@ export default function Portfolio() {
                   <ul className="space-y-2.5 text-xs sm:text-sm text-neutral-700 font-sans">
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] shrink-0 mt-2"></span>
-                      <span>Разрабатывал сайты и digital-инструменты для малого и среднего бизнеса под ключ: от структуры страниц до форм заявок и логики обработки лидов.</span>
+                      <span>Разрабатывал сайты, сервисы и digital-инструменты для малого и среднего бизнеса под ключ: от структуры страниц до форм заявок и логики обработки лидов.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] shrink-0 mt-2"></span>
-                      <span>Проекты: Поглажу РФ, БИС, Зимов и Партнёры (см. секцию «Проекты»).</span>
+                      <span>Проекты: Авточек (autocheck24.ru), Поглажу РФ, БИС, Зимов и Партнёры (см. секцию «Проекты»).</span>
                     </li>
                   </ul>
 
