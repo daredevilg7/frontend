@@ -168,8 +168,8 @@ export default function Portfolio() {
   // Interactive Checklist State
   const [checklist, setChecklist] = useState([
     { id: 1, text: 'Чистая, поддерживаемая и семантическая вёрстка (HTML5 / SCSS / Tailwind)', done: true },
-    { id: 2, text: 'Сокращение пути пользователя до заявки / конверсии до 2–3 кликов', done: true },
-    { id: 3, text: 'Оптимизация скорости загрузки ключевых блоков на +25%', done: true },
+    { id: 2, text: 'Понятные пользовательские сценарии от ввода данных до результата', done: true },
+    { id: 3, text: 'Переиспользуемые UI-компоненты и доработки по результатам code review', done: true },
     { id: 4, text: 'Продуманные состояния форм: валидация, маски, обработка сетевых ошибок', done: true },
     { id: 5, text: 'Полная адаптивность (Mobile / Tablet / Desktop) и кросс-браузерность', done: true },
     { id: 6, text: 'Запустить новый сильный продукт в вашей команде', done: false }
@@ -480,23 +480,23 @@ export default function Portfolio() {
               {/* Vertical Side Label directly next to title letters */}
               <div className="absolute -left-6 sm:-left-8 lg:-left-10 top-1/2 -translate-y-1/2 hidden md:block select-none pointer-events-none">
                 <span className="hero-vertical text-[10px] tracking-[0.2em] text-white/75">
-                  РАЗРАБОТКА / ИНТЕРФЕЙСЫ / КОНВЕРСИЯ
+                  РАЗРАБОТКА / ИНТЕРФЕЙСЫ / ИНТЕГРАЦИИ
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-serif font-normal tracking-tight leading-[1.12] text-[#FFF9F1] max-w-3xl">
+              <h1 aria-label="Разрабатываю интерфейсы и веб-сервисы" className="text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-serif font-normal tracking-tight leading-[1.12] text-[#FFF9F1] max-w-3xl">
                 <div className="mb-1">
-                  {renderSpringWord("Разработчик,")} {renderSpringWord("который")}
+                  {renderSpringWord("Разрабатываю")}
                 </div>
                 <div>
-                  {renderSpringWord("доводит")} {renderSpringWord("интерфейс")} <span className="italic text-[#FFF9F1]">{renderSpringWord("до")} {renderSpringWord("конверсии.")}</span>
+                  {renderSpringWord("интерфейсы")} <span className="italic text-[#FFF9F1]">{renderSpringWord("и")} {renderSpringWord("веб-сервисы")}</span>
                 </div>
               </h1>
             </div>
 
             {/* Subtext description */}
             <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-white/90 font-sans max-w-xl leading-relaxed">
-              Создаю быстрые веб-приложения и сервисы на React и TypeScript. Фокусируюсь на бизнес-задачах, конверсии и чистом коде.
+              Работаю с React, TypeScript и Next.js. Разрабатываю формы, личные кабинеты и пользовательские сценарии. В клиентских проектах также связываю интерфейсы с серверной логикой на WordPress и FastAPI.
             </p>
 
             {/* Action buttons */}
@@ -508,10 +508,11 @@ export default function Portfolio() {
                 Смотреть проекты ↓
               </a>
               <a
-                href="#about"
+                href={asset("/resume/Artem_Gavrilov_Frontend.docx")}
+                download="Artem_Gavrilov_Frontend.docx"
                 className="px-5 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs sm:text-sm font-bold font-mono transition-all backdrop-blur-sm"
               >
-                Подход к работе
+                Скачать резюме · DOCX
               </a>
             </div>
           </div>
@@ -616,11 +617,11 @@ export default function Portfolio() {
           </div>
 
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-light text-[#141416] tracking-tight leading-tight">
-            «Сайт должен не просто открываться быстро — он должен превращать каждого посетителя в заявку и клиента.»
+            Разрабатываю веб-продукты: интерфейсы, серверную логику и интеграции
           </h2>
 
           <p className="mt-6 text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed font-sans">
-            Более 2 лет коммерческого опыта фронтенд-разработки: создаю интерфейсы, формы и личные кабинеты для бизнеса — от быстрых лендингов до многостраничных сервисов. Совмещаю вёрстку с продуктовым мышлением: убираю точки потери лидов.
+            С 2024 года разрабатываю и поддерживаю веб-интерфейсы для бизнеса. В Р.О.С.КОМТЕХ работаю с React и Next.js, в «Квадратной линии» выполняю Fullstack-задачи на WordPress и FastAPI + React. Личные проекты показывают мой подход к компонентам, данным и пользовательским сценариям.
           </p>
 
           {/* CTAs on Cream Background */}
@@ -665,8 +666,8 @@ export default function Portfolio() {
               <div className="text-xs sm:text-sm font-semibold text-neutral-700 mt-1">переиспользуемых UI-модулей</div>
             </div>
             <div className="p-5 rounded-3xl bg-[#FDF6EC] border border-[#EADFCF] hover:shadow-md transition-all">
-              <div className="text-3xl sm:text-4xl font-bold text-emerald-600 font-mono">+25%</div>
-              <div className="text-xs sm:text-sm font-semibold text-neutral-700 mt-1">ускорение отрисовки страниц</div>
+              <div className="text-3xl sm:text-4xl font-bold text-emerald-600 font-mono">4</div>
+              <div className="text-xs sm:text-sm font-semibold text-neutral-700 mt-1">коммерческих кейса в портфолио</div>
             </div>
           </div>
         </section>
@@ -690,18 +691,18 @@ export default function Portfolio() {
                 'TypeScript',
                 'React',
                 'Next.js',
-                'TailwindCSS',
+                'Tailwind CSS',
                 'HTML5',
                 'CSS3 / SCSS',
-                'VueJS',
+                'Styled Components',
                 'JavaScript (ES6+)',
                 'TypeScript',
                 'React',
                 'Next.js',
-                'TailwindCSS',
+                'Tailwind CSS',
                 'HTML5',
                 'CSS3 / SCSS',
-                'VueJS',
+                'Styled Components',
               ].map((tech, i) => (
                 <div
                   key={i}
@@ -721,26 +722,26 @@ export default function Portfolio() {
 
             <div className="flex gap-8 sm:gap-12 animate-marquee-right group-hover:[animation-play-state:paused] py-2">
               {[
-                'Node.js',
+                'Python',
                 'REST API',
                 'Git',
                 'Webpack',
                 'Vite',
-                'Sass',
-                'Gulp',
-                'SPA',
-                'BEM',
-                'GSAP ScrollTrigger',
-                'Node.js',
+                'FastAPI',
+                'WordPress',
+                'PHP',
+                'AJAX',
+                'LocalStorage',
+                'Python',
                 'REST API',
                 'Git',
                 'Webpack',
                 'Vite',
-                'Sass',
-                'Gulp',
-                'SPA',
-                'BEM',
-                'GSAP ScrollTrigger',
+                'FastAPI',
+                'WordPress',
+                'PHP',
+                'AJAX',
+                'LocalStorage',
               ].map((tech, i) => (
                 <div
                   key={i}
@@ -800,7 +801,7 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-[#3456C8] group-hover:text-[#60A5FA] uppercase tracking-wider transition-colors duration-300">
-                        01. Frontend / React & TypeScript
+                        01. Квадратная линия / WordPress
                       </span>
                       <a
                         href="https://poglazhu.ru"
@@ -821,25 +822,25 @@ export default function Portfolio() {
                     <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#3456C8] group-hover:text-[#60A5FA] shrink-0 mt-0.5 transition-colors" />
-                        <span>Разработал SPA-интерфейс оформления заказа с компонентной архитектурой и сквозной валидацией полей.</span>
+                        <span>Разработал интерфейсы расчёта стоимости, выбора формата обслуживания и оформления заказа.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#3456C8] group-hover:text-[#60A5FA] shrink-0 mt-0.5 transition-colors" />
-                        <span>Реализовал реактивный калькулятор стоимости и личный кабинет с сохранением сессии.</span>
+                        <span>Реализовал личный кабинет с отображением статусов заказа и клиентские сценарии сервиса.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#3456C8] group-hover:text-[#60A5FA] shrink-0 mt-0.5 transition-colors" />
-                        <span>Интегрировал REST API для отслеживания 5+ статусов заказа и сценариев обработки сетевых ошибок.</span>
+                        <span>Разрабатывал формы с валидацией, обработку данных и взаимодействие интерфейса с серверной частью WordPress.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#3456C8] group-hover:text-[#60A5FA] shrink-0 mt-0.5 transition-colors" />
-                        <span>Оптимизация бандла и ассетов: Code Splitting, ленивая загрузка и Lighthouse 95+.</span>
+                        <span>Участвовал в реализации пользовательских сценариев бонусной программы.</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
-                    {['React 18', 'TypeScript', 'SCSS Modules', 'Vite', 'REST API', 'SPA'].map((t) => (
+                    {['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'AJAX'].map((t) => (
                       <span key={t} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
                         {t}
                       </span>
@@ -875,16 +876,16 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-[#F59E0B] uppercase tracking-wider transition-colors duration-300">
-                        02. Frontend / Modular JS
+                        02. Квадратная линия / WordPress
                       </span>
                       <a
-                        href="https://bis-rf.ru"
+                        href="https://biscorp.ru/"
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white group-hover:bg-white/10 text-xs font-mono font-bold text-neutral-800 group-hover:text-white border border-neutral-300 group-hover:border-white/20 transition-all hover:scale-105"
                       >
-                        <span>bis-rf.ru</span>
+                        <span>biscorp.ru</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </a>
                     </div>
@@ -896,25 +897,25 @@ export default function Portfolio() {
                     <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 transition-colors" />
-                        <span>Модульная BEM-структура стилей и переиспользуемые UI-виджеты.</span>
+                        <span>Разработал многостраничный сайт инженерной компании с навигацией по услугам и направлениям работ.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 transition-colors" />
-                        <span>Экспресс-калькулятор сметы в 2–3 клика с защитой от повторных отправок (debounce).</span>
+                        <span>Реализовал формы запроса сметы и сроков с валидацией введённых данных.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 transition-colors" />
-                        <span>Асинхронная отправка форм через Fetch API и обработка сетевых ошибок в реальном времени.</span>
+                        <span>Настроил передачу заявок на обработку и обратную связь о результате отправки.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5 transition-colors" />
-                        <span>Оптимизация Core Web Vitals (LCP &lt; 1.1s, нулевой сдвиг макета CLS).</span>
+                        <span>Разработал адаптивные интерфейсы и интерактивные элементы на JavaScript.</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
-                    {['JS ES6+', 'SCSS', 'BEM', 'Vite', 'Fetch API', 'LCP < 1.1s'].map((t) => (
+                    {['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS', 'AJAX'].map((t) => (
                       <span key={t} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
                         {t}
                       </span>
@@ -944,7 +945,7 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-[#EA580C] group-hover:text-[#FB923C] uppercase tracking-wider transition-colors duration-300">
-                        03. Frontend / React & REST API
+                        03. Квадратная линия / Fullstack
                       </span>
                       <a
                         href="https://autocheck24.ru"
@@ -965,25 +966,25 @@ export default function Portfolio() {
                     <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
-                        <span>Разработал SPA-интерфейс сервиса проверки авто по VIN, госномеру и номеру кузова.</span>
+                        <span>Разрабатывал React-интерфейс сервиса проверки автомобиля по VIN, госномеру и номеру кузова.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
-                        <span>Реализовал валидацию и маскирование полей ввода для безошибочного оформления запроса.</span>
+                        <span>Реализовывал валидацию ввода, состояния загрузки и отображение результатов проверки.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
-                        <span>Спроектировал динамическую ленту последних проверок и интерактивный просмотр примера отчёта.</span>
+                        <span>Разрабатывал серверные API на FastAPI для обработки запросов клиентской части.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#EA580C] group-hover:text-[#FB923C] shrink-0 mt-0.5 transition-colors" />
-                        <span>Интегрировал REST API для асинхронного поиска по базам данных с индикацией этапов загрузки.</span>
+                        <span>Связывал React-интерфейс с серверной логикой и внешними сервисами получения данных об автомобилях.</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
-                    {['React', 'TypeScript', 'TailwindCSS', 'REST API', 'Vite', 'UI/UX'].map((tag) => (
+                    {['React', 'Python', 'FastAPI', 'REST API', 'Fullstack'].map((tag) => (
                       <span key={tag} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
                         {tag}
                       </span>
@@ -1010,7 +1011,7 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-[#4361EE] group-hover:text-[#818CF8] uppercase tracking-wider transition-colors duration-300">
-                        04. Frontend / React & UX
+                        04. Квадратная линия / WordPress
                       </span>
                       <a
                         href="https://zimovlaw.ru"
@@ -1031,25 +1032,25 @@ export default function Portfolio() {
                     <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#4361EE] group-hover:text-[#818CF8] shrink-0 mt-0.5 transition-colors" />
-                        <span>Разработка адаптивного SPA-интерфейса под Retina-дисплеи (Pixel Perfect по Figma).</span>
+                        <span>Разработал адаптивные страницы юридической практики на WordPress.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#4361EE] group-hover:text-[#818CF8] shrink-0 mt-0.5 transition-colors" />
-                        <span>Архитектура навигации по 5 ключевым практикам с мгновенным переключением разделов.</span>
+                        <span>Организовал навигацию по направлениям юридических услуг.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#4361EE] group-hover:text-[#818CF8] shrink-0 mt-0.5 transition-colors" />
-                        <span>Формы быстрой записи на консультацию с валидацией и серверной обработкой.</span>
+                        <span>Реализовал формы обращения с валидацией и передачей данных на обработку.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-[#4361EE] group-hover:text-[#818CF8] shrink-0 mt-0.5 transition-colors" />
-                        <span>Интеграция CRM-вебхуков для мгновенной передачи лидов с формы.</span>
+                        <span>Разработал сценарий выбора практики и отправки запроса на консультацию.</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
-                    {['React', 'TailwindCSS', 'SCSS', 'Vite', 'CRM Webhooks', 'Speed'].map((tag) => (
+                    {['WordPress', 'PHP', 'JavaScript', 'HTML', 'CSS'].map((tag) => (
                       <span key={tag} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
                         {tag}
                       </span>
@@ -1068,7 +1069,7 @@ export default function Portfolio() {
                 <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#94EED6] border border-black/10 group-hover:border-neutral-700/60 shadow-md group-hover:shadow-2xl transition-all duration-500 flex items-center justify-center">
                   <img
                     src={asset('/assets/freenet-mockup.png')}
-                    alt="FreeNet Open Source PWA"
+                    alt="FreeNet — личный проект с открытым исходным кодом"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -1078,10 +1079,10 @@ export default function Portfolio() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono font-bold text-emerald-600 group-hover:text-emerald-400 uppercase tracking-wider transition-colors duration-300">
-                        05. Open Source / PWA & Geo
+                        05. Личный проект / JavaScript & Geo
                       </span>
                       <a
-                        href="https://github.com/daredevil666l/FreeNet"
+                        href="https://github.com/daredevilg7/FreeNet"
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -1099,25 +1100,25 @@ export default function Portfolio() {
                     <ul className="mt-4 space-y-2.5 text-xs sm:text-sm text-neutral-700 group-hover:text-neutral-300 font-sans transition-colors duration-300">
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 group-hover:text-emerald-400 shrink-0 mt-0.5 transition-colors" />
-                        <span>PWA веб-приложение с использованием LocalStorage для поиска ближайших точек бесплатного Wi-Fi.</span>
+                        <span>Разработал приложение для поиска ближайших Wi-Fi-точек на карте.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 group-hover:text-emerald-400 shrink-0 mt-0.5 transition-colors" />
-                        <span>Работает стабильно и автономно даже при включенных белых списках и отсутствии стабильной сети.</span>
+                        <span>Сохраняю данные и состояние карты в LocalStorage; добавил Web App Manifest и инструкции установки.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 group-hover:text-emerald-400 shrink-0 mt-0.5 transition-colors" />
-                        <span>Интерактивная карта геопозиционирования с базой точек Wi-Fi Уфанет, собранных из открытого доступа.</span>
+                        <span>Реализовал карту на Leaflet и OpenStreetMap, геолокацию и отображение Wi-Fi-точек.</span>
                       </li>
                       <li className="flex items-start gap-2.5">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 group-hover:text-emerald-400 shrink-0 mt-0.5 transition-colors" />
-                        <span>Построение маршрутов, копирование координат и офлайн-кэширование интерфейса (Offline First).</span>
+                        <span>Реализовал копирование координат и открытие маршрута во внешних картах.</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-black/5 group-hover:border-white/10 flex flex-wrap gap-1.5 font-mono transition-colors duration-300">
-                    {['Open Source', 'PWA', 'LocalStorage', 'Leaflet / Maps', 'Offline First', 'GitHub'].map((tag) => (
+                    {['Открытый код', 'JavaScript', 'Leaflet', 'Geolocation API', 'LocalStorage', 'Web App Manifest'].map((tag) => (
                       <span key={tag} className="px-2.5 py-1 rounded-lg bg-black/5 group-hover:bg-white/10 text-xs text-neutral-700 group-hover:text-neutral-200 transition-colors">
                         {tag}
                       </span>
@@ -1139,7 +1140,7 @@ export default function Portfolio() {
                   10+ проектов с нуля и 20+ переиспользуемых UI-компонентов
                 </h4>
                 <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">
-                  Также с нуля сверстал 10+ проектов (лендинги, многостраничные сайты, интерактивные страницы) и разработал 20+ переиспользуемых UI-компонентов (формы с валидацией, модальные окна, слайдеры, квизы, личные кабинеты) на стажировке в <strong>Р.О.С.КОМТЕХ</strong>.
+                  На стажировке в <strong>Р.О.С.КОМТЕХ</strong> сверстал 10+ проектов и разработал 20+ переиспользуемых UI-компонентов. Это портфолио — мой личный проект на <strong>React, Tailwind CSS и Vite</strong>: адаптивный интерфейс с коммерческими кейсами, опытом и контактами.
                 </p>
               </div>
             </div>
@@ -1166,7 +1167,7 @@ export default function Portfolio() {
                   Практический коммерческий опыт
                 </h2>
                 <p className="mt-4 text-sm text-neutral-600 leading-relaxed font-sans">
-                  От разработки интерфейсов в научном предприятии до создания digital-решений под ключ и преподавания фронтенда.
+                  Разработка интерфейсов в Р.О.С.КОМТЕХ, Fullstack-задачи в «Квадратной линии» и преподавание программирования.
                 </p>
 
                 <div className="mt-8 hidden lg:block">
@@ -1213,7 +1214,7 @@ export default function Portfolio() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#3456C8] shrink-0 mt-2"></span>
-                      <span>Ускорил отображение ключевых блоков сайтов на 25% за счёт оптимизации CSS/JS.</span>
+                      <span>Разрабатывал и поддерживал страницы и UI-компоненты на React и Next.js.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#3456C8] shrink-0 mt-2"></span>
@@ -1221,7 +1222,7 @@ export default function Portfolio() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#3456C8] shrink-0 mt-2"></span>
-                      <span>Участвовал в code review, исправлял баги, поддерживал единый стиль компонентов.</span>
+                      <span>Участвовал в code review: дорабатывал компоненты по замечаниям, исправлял ошибки и поддерживал единый стиль кода.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#3456C8] shrink-0 mt-2"></span>
@@ -1230,7 +1231,7 @@ export default function Portfolio() {
                   </ul>
 
                   <div className="mt-5 pt-4 border-t border-neutral-100 flex flex-wrap gap-1.5 font-mono">
-                    {['HTML5', 'SCSS', 'JS ES6+', 'TypeScript', 'Webpack', 'Vite', 'Git'].map((t) => (
+                    {['React', 'Next.js', 'JavaScript', 'TypeScript', 'SCSS', 'Webpack', 'Vite', 'Git'].map((t) => (
                       <span key={t} className="px-2 py-0.5 rounded bg-neutral-100 text-[11px] text-neutral-700">
                         {t}
                       </span>
@@ -1246,7 +1247,7 @@ export default function Portfolio() {
                         Январь 2024 — настоящее время
                       </span>
                       <h3 className="text-xl sm:text-2xl font-bold text-[#141416] mt-0.5">
-                        Frontend-разработчик
+                        Fullstack-разработчик
                       </h3>
                       <p className="text-sm font-semibold text-neutral-600 font-sans">
                         Digital-агентство «Квадратная линия» · Уфа
@@ -1257,16 +1258,16 @@ export default function Portfolio() {
                   <ul className="space-y-2.5 text-xs sm:text-sm text-neutral-700 font-sans">
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] shrink-0 mt-2"></span>
-                      <span>Разрабатывал сайты, сервисы и digital-инструменты для малого и среднего бизнеса под ключ: от структуры страниц до форм заявок и логики обработки лидов.</span>
+                      <span>Разрабатываю и сопровождаю клиентские веб-продукты: сервис проверки автомобилей, сервис заказа услуг и корпоративные сайты. Работаю с интерфейсами, серверной логикой и интеграциями.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] shrink-0 mt-2"></span>
-                      <span>Проекты: Авточек (autocheck24.ru), Поглажу РФ, БИС, Зимов и Партнёры (см. секцию «Проекты»).</span>
+                      <span>Небольшие проекты реализую на WordPress и JavaScript, более сложные сервисы — на FastAPI и React. Коммерческие кейсы: Авточек, Поглажу, БИС, Зимов и Партнёры.</span>
                     </li>
                   </ul>
 
                   <div className="mt-5 pt-4 border-t border-neutral-100 flex flex-wrap gap-1.5 font-mono">
-                    {['React', 'Next.js', 'TailwindCSS', 'REST API', 'Figma to Code'].map((tag) => (
+                    {['React', 'Python', 'FastAPI', 'WordPress', 'PHP', 'JavaScript', 'REST API'].map((tag) => (
                       <span key={tag} className="px-2 py-0.5 rounded bg-neutral-100 text-[11px] text-neutral-700">
                         {tag}
                       </span>
@@ -1293,7 +1294,7 @@ export default function Portfolio() {
                   <ul className="space-y-2.5 text-xs sm:text-sm text-neutral-700 font-sans">
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 shrink-0 mt-2"></span>
-                      <span>Провёл <strong>1000+ онлайн-занятий</strong> и лекций по программированию и веб-разработке.</span>
+                      <span>Преподавал основы программирования и веб-разработки, помогал ученикам осваивать технические навыки.</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 shrink-0 mt-2"></span>
@@ -1368,7 +1369,7 @@ export default function Portfolio() {
                   <div className="aspect-[4/3] rounded-2xl bg-[#FFF7ED] border border-[#FED7AA] flex flex-col items-center justify-center p-4 text-center">
                     <Sparkles className="w-9 h-9 mb-2 text-[#D97706] transition-transform duration-300 group-hover:scale-110" />
                     <span className="font-extrabold text-sm tracking-wide font-mono text-[#9A3412]">Продуктовый подход</span>
-                    <span className="text-[11px] text-[#7C2D12]/80 mt-0.5 font-sans font-medium">Конверсия & UX</span>
+                    <span className="text-[11px] text-[#7C2D12]/80 mt-0.5 font-sans font-medium">Сценарии & интеграции</span>
                   </div>
                   <div className="pt-3 text-center">
                     <span className="font-serif italic text-sm text-neutral-700">Уфа · 2+ года коммерции</span>
@@ -1384,18 +1385,18 @@ export default function Portfolio() {
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-display font-medium text-[#141416] tracking-tight">
-                Фронтенд-разработчик, нацеленный на измеримую пользу бизнесу
+                Frontend-разработчик с опытом Fullstack-задач
               </h2>
 
               <div className="text-base text-neutral-700 leading-relaxed space-y-4 font-sans">
                 <p>
-                  Frontend-разработчик с коммерческим опытом создания веб-интерфейсов, сервисов и digital-инструментов для бизнеса — более 2 лет. Умею не просто вёрстать по макетам, а погружаться в бизнес-задачи: анализировать пользовательский путь, устранять точки потери лидов и улучшать конверсию сайтов.
+                  Я Артем Гаврилов, frontend-разработчик из Уфы. С 2024 года разрабатываю и поддерживаю веб-интерфейсы для бизнеса. Мой основной стек — JavaScript, TypeScript, React и Next.js.
                 </p>
                 <p>
-                  Есть опыт работы с сервисными, юридическими и инжиниринговыми компаниями, а также опыт преподавания — сильные soft skills и умение объяснять сложные решения простым языком.
+                  В Р.О.С.КОМТЕХ работаю над интерфейсами и переиспользуемыми UI-компонентами, участвую в code review. В Digital-агентстве «Квадратная линия» выполняю Fullstack-задачи: разрабатываю клиентскую и серверную части сайтов на WordPress и сервисов на FastAPI + React.
                 </p>
                 <p className="font-semibold text-neutral-900">
-                  Ищу позицию Frontend-разработчика (JavaScript / TypeScript / React), где смогу развивать продуктовые решения, писать чистый поддерживаемый код и приносить измеримую пользу компании.
+                  Мне интересна работа над развитием веб-продукта: пользовательскими сценариями, компонентами и интеграциями. Опыт преподавания помогает понятно объяснять технические решения. Рассматриваю удалённую работу, гибрид или офис в Уфе.
                 </p>
               </div>
 
@@ -1464,7 +1465,7 @@ export default function Portfolio() {
                     Frontend
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
-                    React, TypeScript, JavaScript (ES6+), Next.js, Vue.js, SCSS, TailwindCSS, HTML5, BEM
+                    React, TypeScript, JavaScript (ES6+), Next.js, SCSS, Styled Components, Tailwind CSS, HTML5, CSS3
                   </span>
                 </div>
 
@@ -1474,17 +1475,17 @@ export default function Portfolio() {
                     Сборка & Dev
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
-                    Vite, Webpack, Git, Gulp, TeamCity, Nginx, Figma to Code
+                    Vite, Webpack, Git, Figma, code review
                   </span>
                 </div>
 
                 {/* Row 3 */}
                 <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
                   <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
-                    Интеграции
+                    Backend
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
-                    REST API, Fetch API, WebSockets, LocalStorage, PWA, CRM Webhooks
+                    Python, FastAPI, WordPress, PHP, REST API, AJAX, Fetch API, CRM-интеграции
                   </span>
                 </div>
 
@@ -1494,7 +1495,7 @@ export default function Portfolio() {
                     Стандарты
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
-                    Core Web Vitals (LCP &lt; 1.1s), кросс-браузерность, адаптивность, Pixel Perfect, a11y
+                    Адаптивность, кроссбраузерность, валидация форм, обработка ошибок, переиспользуемые компоненты
                   </span>
                 </div>
 
@@ -1504,7 +1505,7 @@ export default function Portfolio() {
                     Языки
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
-                    Русский (родной), Английский (технический / чтение документации)
+                    Русский — родной, Английский — B2, Немецкий — B1
                   </span>
                 </div>
               </div>
@@ -1575,16 +1576,16 @@ export default function Portfolio() {
                   <div className="min-w-0">
                     <span className="text-[11px] font-mono text-neutral-400 block mb-0.5 uppercase tracking-wider">GitHub</span>
                     <a
-                      href="https://github.com/daredevil666l"
+                      href="https://github.com/daredevilg7"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm sm:text-base font-mono text-white hover:text-neutral-300 transition-colors block"
                     >
-                      github.com/daredevil666l
+                      github.com/daredevilg7
                     </a>
                   </div>
                   <a
-                    href="https://github.com/daredevil666l"
+                    href="https://github.com/daredevilg7"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white transition-colors"
