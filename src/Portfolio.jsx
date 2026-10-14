@@ -507,13 +507,6 @@ export default function Portfolio() {
               >
                 Смотреть проекты ↓
               </a>
-              <a
-                href={asset("/resume/Artem_Gavrilov_Frontend.docx")}
-                download="Artem_Gavrilov_Frontend.docx"
-                className="px-5 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white border border-white/20 text-xs sm:text-sm font-bold font-mono transition-all backdrop-blur-sm"
-              >
-                Скачать резюме · DOCX
-              </a>
             </div>
           </div>
         </div>
@@ -1460,8 +1453,8 @@ export default function Portfolio() {
               {/* Right Column: Clean Editorial List */}
               <div className="md:w-7/12 divide-y divide-[#E2D5C2] border-y border-[#E2D5C2]">
                 {/* Row 1 */}
-                <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
+                <div className="py-4 sm:py-5 grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                     Frontend
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
@@ -1470,8 +1463,8 @@ export default function Portfolio() {
                 </div>
 
                 {/* Row 2 */}
-                <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
+                <div className="py-4 sm:py-5 grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                     Сборка & Dev
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
@@ -1480,8 +1473,8 @@ export default function Portfolio() {
                 </div>
 
                 {/* Row 3 */}
-                <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
+                <div className="py-4 sm:py-5 grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                     Backend
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
@@ -1490,8 +1483,8 @@ export default function Portfolio() {
                 </div>
 
                 {/* Row 4 */}
-                <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
+                <div className="py-4 sm:py-5 grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                     Стандарты
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
@@ -1500,8 +1493,8 @@ export default function Portfolio() {
                 </div>
 
                 {/* Row 5 */}
-                <div className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider w-36 shrink-0">
+                <div className="py-4 sm:py-5 grid grid-cols-1 sm:grid-cols-[9rem_minmax(0,1fr)] items-baseline gap-2">
+                  <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                     Языки
                   </span>
                   <span className="text-sm sm:text-base text-neutral-900 font-medium font-sans">
